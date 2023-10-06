@@ -6,8 +6,7 @@
     and returns their sum as a float.
 """
 
-from typing import Callable, Iterator, Union, Optional
-
 
 def add(a: float, b: float) -> float:
+    """return the sum"""
     return a + b
