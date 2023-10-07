@@ -6,6 +6,7 @@
     Hint: look into TypeVar
 """
 from typing import TypeVar, Mapping, Union, Any
+
 T = TypeVar('T', None, Any)
 
 
