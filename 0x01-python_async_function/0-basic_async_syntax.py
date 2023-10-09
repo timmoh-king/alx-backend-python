@@ -11,7 +11,7 @@ import random
 from typing import Optional
 
 
-async def wait_random(max_delay: int = 10) -> Optional[float]:
+async def wait_random(max_delay: int = 10) -> float:
     """waits for a random delay between 0 and max_delay"""
     i = random.randint(0, max_delay)
     await asyncio.sleep(i)
