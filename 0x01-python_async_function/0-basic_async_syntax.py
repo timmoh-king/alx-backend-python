@@ -9,6 +9,7 @@ import random
 import asyncio
 from typing import Union
 
+
 async def wait_random(max_delay: int = 10) -> Union[int, float]:
     """waits for a random delay between 0 and max_delay"""
     i = random.randint(0, max_delay)
