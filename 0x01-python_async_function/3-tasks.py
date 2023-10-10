@@ -7,10 +7,9 @@
 """
 
 wait_random = __import__('0-basic_async_syntax').wait_random
-from typing import List
 import asyncio
 
 
-def task_wait_random(max_delay: int) -> List[list]:
+def task_wait_random(max_delay):
     task = asyncio.create_task(wait_random(max_delay))
     return task
