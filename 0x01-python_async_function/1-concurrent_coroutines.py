@@ -2,9 +2,9 @@
 
 """
     Import wait_random from the previous python file
-    write an async routine called wait_n that takes in 2 int arguments:
-    n and max_delay  You will spawn wait_random n times with the specified max_delay
-    wait_n should return the list of all the delays (float values) in ascending order
+    write an async routine called wait_n that takes in 2 int args:
+    n and max_delay. spawn wait_random n times with the specified max_delay
+    wait_n should return the list of all the delays (float values) in asc order
 """
 
 wait_random = __import__('0-basic_async_syntax').wait_random
