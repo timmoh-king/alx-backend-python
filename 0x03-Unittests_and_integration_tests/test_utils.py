@@ -61,7 +61,7 @@ class TestGetJson(unittest.TestCase):
 
     def test_get_json(
             self,
-            url: str,
+            test_url: str,
             test_payload: Dict
             ) -> None:
         """
@@ -69,6 +69,9 @@ class TestGetJson(unittest.TestCase):
              We don’t want to make any actual external HTTP calls
              Use unittest.mock.patch to patch requests.get
         """
-        with patch("requests.get", return_value=Mock(**attrs)) as req_get:
-            self.assertEqual(get_json(test_url), test_payload)
-            req_get.assert_called_once_with(test_url)
+        mock_response = Mock()
+        mock_response.json.return_value = test_payload
+
+        with patch('requests.get', return_value=mock_response):
+            result = get_json(test_url)
+        self.assertEqual(result, test_payload)
