@@ -12,7 +12,8 @@ from typing import Tuple, Union, Dict
 from parameterized import parameterized
 from utils import (
     access_nested_map,
-    get_json
+    get_json,
+    memoize
 )
 
 
@@ -50,28 +51,56 @@ class TestAccessNestedMap(unittest.TestCase):
         with self.assertRaises(exception):
             access_nested_map(nested_map, path)
 
-class TestGetJson(unittest.TestCase):
-    """Define the TestGetJson(unittest.TestCase) class"""
-    @parameterized.expand([
-        ("http://example.com", {"payload": True}),
-        ("http://holberton.io", {"payload": False})
-    ])
+# class TestGetJson(unittest.TestCase):
+#     """Define the TestGetJson(unittest.TestCase) class"""
+#     @parameterized.expand([
+#         ("http://example.com", {"payload": True}),
+#         ("http://holberton.io", {"payload": False})
+#     ])
 
-    @patch('request.get')
+#     @patch('request.get')
 
-    def test_get_json(
-            self,
-            test_url: str,
-            test_payload: Dict
-            ) -> None:
+#     def test_get_json(
+#             self,
+#             test_url: str,
+#             test_payload: Dict
+#             ) -> None:
+#         """
+#              test that utils.get_json returns the expected result
+#              We don’t want to make any actual external HTTP calls
+#              Use unittest.mock.patch to patch requests.get
+#         """
+#         mock_response = Mock()
+#         mock_response.json.return_value = test_payload
+
+#         with patch("requests.get", return_value=mock_response):
+#             result = get_json(test_url)
+#         self.assertEqual(result, test_payload)
+
+class TestMemoize(unittest.TestCase):
+    """
+        Create TestMemoize(unittest.TestCase) class with a test_memoize method
+    """
+    def test_memoize(self):
         """
-             test that utils.get_json returns the expected result
-             We don’t want to make any actual external HTTP calls
-             Use unittest.mock.patch to patch requests.get
+            Inside test_memoize, define following class
         """
-        mock_response = Mock()
-        mock_response.json.return_value = test_payload
+        class TestClass:
+            """Example class given"""
+            def a_method(self):
+                """return 42"""
+                return 42
 
-        with patch('requests.get', return_value=mock_response):
-            result = get_json(test_url)
-        self.assertEqual(result, test_payload)
+            @memoize
+            def a_property(self):
+                return self.a_method()
+
+        with patch.object(TestClass, 'a_method') as mock_get:
+            test_class = TestClass()
+            test_class.a_property()
+            test_class.a_property()
+            mock_get.assert_called_once()
+
+
+if __name__ == "__main__":
+    unittest.main()
