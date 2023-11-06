@@ -51,31 +51,33 @@ class TestAccessNestedMap(unittest.TestCase):
         with self.assertRaises(exception):
             access_nested_map(nested_map, path)
 
-# class TestGetJson(unittest.TestCase):
-#     """Define the TestGetJson(unittest.TestCase) class"""
-#     @parameterized.expand([
-#         ("http://example.com", {"payload": True}),
-#         ("http://holberton.io", {"payload": False})
-#     ])
 
-#     @patch('request.get')
+class TestGetJson(unittest.TestCase):
+    """Define the TestGetJson(unittest.TestCase) class"""
+    @parameterized.expand([
+        ("http://example.com", {"payload": True}),
+        ("http://holberton.io", {"payload": False})
+    ])
 
-#     def test_get_json(
-#             self,
-#             test_url: str,
-#             test_payload: Dict
-#             ) -> None:
-#         """
-#              test that utils.get_json returns the expected result
-#              We don’t want to make any actual external HTTP calls
-#              Use unittest.mock.patch to patch requests.get
-#         """
-#         mock_response = Mock()
-#         mock_response.json.return_value = test_payload
+    @patch('request.get')
 
-#         with patch("requests.get", return_value=mock_response):
-#             result = get_json(test_url)
-#         self.assertEqual(result, test_payload)
+    def test_get_json(
+            self,
+            test_url: str,
+            test_payload: Dict
+            ) -> None:
+        """
+             test that utils.get_json returns the expected result
+             We don’t want to make any actual external HTTP calls
+             Use unittest.mock.patch to patch requests.get
+        """
+        mock_response = Mock()
+        mock_response.json.return_value = test_payload
+
+        with patch("requests.get", return_value=mock_response):
+            result = get_json(test_url)
+        self.assertEqual(result, test_payload)
+
 
 class TestMemoize(unittest.TestCase):
     """
